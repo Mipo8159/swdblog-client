@@ -8,12 +8,15 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import { useNotification } from "../../context/notification.context";
+import { ValidateLogin } from "../../utils/validate.form";
 
-type LoginType = { username: string; password: string };
+type LoginType = { email: string; password: string };
 
 export const LoginPage: React.FC = () => {
+  const { notify } = useNotification();
   const [loginData, setLoginData] = React.useState<LoginType>({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -23,7 +26,13 @@ export const LoginPage: React.FC = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(loginData);
+    ValidateLogin.validate(loginData)
+      .then(() => {
+        notify(JSON.stringify(loginData), "success");
+      })
+      .catch((error) => {
+        notify(error.message, "error");
+      });
   };
 
   return (
@@ -42,13 +51,12 @@ export const LoginPage: React.FC = () => {
             </Typography>
             <Box onSubmit={handleSubmit} component="form">
               <TextField
-                type="text"
+                type="email"
                 fullWidth
-                label="username"
-                name="username"
+                label="email"
+                name="email"
                 sx={{ mt: 2, mb: 1.5 }}
                 onChange={handleChange}
-                required
               />
               <TextField
                 type="password"
@@ -57,7 +65,6 @@ export const LoginPage: React.FC = () => {
                 label="password"
                 sx={{ mt: 2, mb: 1.5 }}
                 onChange={handleChange}
-                required
               />
 
               <Button

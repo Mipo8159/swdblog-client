@@ -9,6 +9,8 @@ export enum ThemePalette {
 
   ERROR_MAIN = "#f44336",
   BG_ERROR_MAIN = "rgba(244,67,54,0.1)",
+  SUCCESS_MAIN = "#66bb6a",
+  BG_SUCCESS_MAIN = "rgba(102,187,106,0.1)",
 }
 
 type ThemeProp = {
@@ -50,6 +52,10 @@ const darkTheme = createTheme({
         standardError: {
           border: `1px solid ${ThemePalette.ERROR_MAIN}`,
           background: ThemePalette.BG_ERROR_MAIN,
+        },
+        standardSuccess: {
+          border: `1px solid ${ThemePalette.SUCCESS_MAIN}`,
+          background: ThemePalette.BG_SUCCESS_MAIN,
         },
       },
     },

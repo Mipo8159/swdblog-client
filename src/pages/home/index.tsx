@@ -1,18 +1,19 @@
 import React from "react";
 import { Container, Button } from "@mui/material";
-import { useNotification } from "../../context/notification.context";
+import { Header } from "../../components/Header";
 
 export const HomePage: React.FC = () => {
-  const { getError } = useNotification();
-
-  const handleClick = () => {
-    getError("hello error");
-  };
   return (
     <Container sx={{ mt: 9 }} maxWidth="xl">
-      <Button onClick={handleClick} variant="contained">
-        Home
-      </Button>
+      <Header
+        title="Hello there"
+        description="General Kenobi, you are a bold one."
+        element={
+          <Button variant="contained" fullWidth>
+            To Tatooine
+          </Button>
+        }
+      />
     </Container>
   );
 };
